@@ -21,9 +21,9 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 snapshots:
     orders:
-        unique_key: order_id
-        strategy: status
-        updated_at: order_date
+        +unique_key: order_id
+        +strategy: status
+        +updated_at: order_date
 models:
   jaffle_shop:
       materialized: table
