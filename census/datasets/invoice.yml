@@ -1,0 +1,11 @@
+---
+dataset:invoice:
+  type: sql
+  name: invoice
+  query: select 'alsdkj' as _id, 'testId1213' as extId, 'USD' as currency, 'test'
+    as product, '68ac96cfa228973e909167e4' as cId, 'cName' as cName, 'sourceId' as
+    sourceId, CURRENT_DATE as lastUpdated, 63923359157 as date, 123.42 as amount,
+    'paid' as status, '["alex@getcensus.com"]' as emails
+  description: ''
+  icon:
+  connection: connection:redshift-tf-redshift-demo-cluster

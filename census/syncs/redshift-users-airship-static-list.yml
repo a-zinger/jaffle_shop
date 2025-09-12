@@ -1,0 +1,51 @@
+---
+sync:redshift-users-airship-static-list:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:airship
+    object_identifier: user
+  source:
+    type: dataset
+    connection_identifier: connection:redshift-tf-redshift-demo-cluster
+    object_identifier: dataset:users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: named_user
+    is_primary_identifier: true
+  - from:
+      type: constant
+      data:
+        basic_type: text
+        value: alex test
+    to:
+      field_name: static_list_id
+      lookup_object:
+        object_identifier: static_list
+        field_to_match_by: id
+    array_field: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75

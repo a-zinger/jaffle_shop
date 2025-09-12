@@ -1,0 +1,67 @@
+---
+sync:redshift-real-users-httprequest-sync-d59ed2de-dd60-4c62-9bff-abe947a28c7d:
+  paused: false
+  behavior:
+    operation: append
+    append_properties:
+      backfill_records: true
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:http-request
+  source:
+    type: dataset
+    connection_identifier: connection:redshift-tf-redshift-demo-cluster
+    object_identifier: dataset:real-users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: _census_tracking_id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: first_name
+    to:
+      field_name: firstname
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: last_name
+    to:
+      field_name: lastname
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  advanced_configuration:
+    batch_size: 3
+    http_method: POST
+    payload_type: url_encoded
+    http_endpoint: "/v1/users"
+    trigger_methods: rows_added/rows_updated
+    payload_json_subtype: template
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

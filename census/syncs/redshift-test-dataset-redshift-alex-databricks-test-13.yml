@@ -1,0 +1,47 @@
+---
+sync:redshift-test-dataset-redshift-alex-databricks-test-13:
+  paused: false
+  behavior:
+    operation: update
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:redshift-tf-redshift-demo-cluster
+    object_identifier: census:alex_databricks_test
+  source:
+    type: dataset
+    connection_identifier: connection:redshift-tf-redshift-demo-cluster
+    object_identifier: dataset:test-dataset
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: beans
+    to:
+      field_name: email
+    is_primary_identifier: true
+  - from:
+      type: segment-membership
+      data:
+        identify_by: name
+    to:
+      field_name: array
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

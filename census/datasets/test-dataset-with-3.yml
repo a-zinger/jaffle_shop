@@ -1,0 +1,13 @@
+---
+dataset:test-dataset-with-3:
+  type: sql
+  name: test dataset with 3
+  query: |
+    -- Use Census SQL to query any dataset in your Census Storage warehouse
+    -- Select from datasets in the SQL Schema to the left or start typing a dataset name
+    SELECT * FROM datasets.diverse_data
+    join (SELECT * FROM datasets.events) events
+    join (SELECT * FROM datasets.users) users
+  description: ''
+  icon:
+  connection: connection:census-store

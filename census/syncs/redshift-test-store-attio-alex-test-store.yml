@@ -1,0 +1,100 @@
+---
+sync:redshift-test-store-attio-alex-test-store:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:attio
+    object_identifier: custom:alex_test_stores
+  source:
+    type: dataset
+    connection_identifier: connection:redshift-tf-redshift-demo-cluster
+    object_identifier: dataset:test-store
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: address_line_1
+    to:
+      field_name: location.line_1
+  - from:
+      type: column
+      data:
+        column_name: address_line_1
+    to:
+      field_name: location.line_3
+  - from:
+      type: column
+      data:
+        column_name: address_line_1
+    to:
+      field_name: location.line_4
+  - from:
+      type: column
+      data:
+        column_name: country_code
+    to:
+      field_name: location.country_code
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: location.longitude
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: location.latitude
+  - from:
+      type: column
+      data:
+        column_name: locality
+    to:
+      field_name: location.locality
+  - from:
+      type: column
+      data:
+        column_name: locality
+    to:
+      field_name: location.line_2
+  - from:
+      type: column
+      data:
+        column_name: name
+    to:
+      field_name: name
+  - from:
+      type: column
+      data:
+        column_name: postcode
+    to:
+      field_name: location.postcode
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75

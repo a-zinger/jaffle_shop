@@ -1,0 +1,8 @@
+---
+dataset:test:
+  type: sql
+  name: test
+  query: select * from datasets.large_diverse_data
+  description:
+  icon:
+  connection: connection:census-store

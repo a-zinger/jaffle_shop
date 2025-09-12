@@ -1,0 +1,63 @@
+---
+sync:redshift-test-tickets-zendesk-ticket:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:zendesk
+    object_identifier: ticket
+  source:
+    type: dataset
+    connection_identifier: connection:redshift-tf-redshift-demo-cluster
+    object_identifier: dataset:test-tickets
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: external_id
+    is_primary_identifier: true
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: eras
+    to:
+      field_name: custom_field:34303965074711
+    array_field: true
+  - from:
+      type: column
+      data:
+        column_name: name
+    to:
+      field_name: comment
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: type
+    to:
+      field_name: type
+    preserve_values: false
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

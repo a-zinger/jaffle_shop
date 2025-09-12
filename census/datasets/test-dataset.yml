@@ -1,0 +1,8 @@
+---
+dataset:test-dataset:
+  type: sql
+  name: test dataset
+  query: select 'cool' as beans, 'rad' as lentils, 'sweet' as peas
+  description:
+  icon:
+  connection: connection:redshift-tf-redshift-demo-cluster

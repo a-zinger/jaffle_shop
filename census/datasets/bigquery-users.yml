@@ -1,0 +1,14 @@
+---
+dataset:bigquery-users:
+  type: sql
+  name: bigquery users
+  query: |-
+    select '1' as id, 'alex' as name, 'purple' as favourite_colour
+    union all select '2' as id, 'charmaine' as name, 'purple' as favourite_colour
+    union all select '3' as id, 'lexie' as name, 'rose' as favourite_colour
+    union all select '4' as id, 'nischay' as name, 'orange' as favourite_colour
+    union all select '5' as id, 'doug' as name, 'green' as favourite_colour
+    union all select '6' as id, 'brad' as name, 'pink' as favourite_colour
+  description: ''
+  icon:
+  connection: connection:bigquery-sutrolabs-giza-development

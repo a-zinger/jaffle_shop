@@ -1,0 +1,62 @@
+---
+sync:redshift-test-data-for-linkedin-new-linkedin-census-test-conversions-5:
+  paused: false
+  behavior:
+    operation: append
+    append_properties:
+      backfill_records: true
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:linkedin
+    object_identifier: conversion_rule:20745148
+  source:
+    type: dataset
+    connection_identifier: connection:redshift-tf-redshift-demo-cluster
+    object_identifier: dataset:test-data-for-linkedin-1
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: _census_tracking_id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: event_time
+    to:
+      field_name: conversion_happened_at
+  - from:
+      type: column
+      data:
+        column_name: linkedin_first_party_id
+    to:
+      field_name: user_id
+  - from:
+      type: constant
+      data:
+        basic_type: text
+        value: LINKEDIN_FIRST_PARTY_ADS_TRACKING_UUID
+    to:
+      field_name: user_id_type
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords
