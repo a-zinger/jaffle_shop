@@ -2,7 +2,7 @@
 dataset:test-dataset:
   type: sql
   name: test dataset
-  query: select 'cool' as beans, 'rad' as lentils, 'sweet' as peas, 'blue' as cheese
+  query: select 'cool' as beans, 'rad' as lentils, 'sweet' as peas, 'blue' as cheese, 'weak' as knees
   description:
   icon:
   connection: connection:redshift-tf-redshift-demo-cluster
