@@ -30,7 +30,7 @@ sync:redshift-real-users-googleads-customer-match-list-1:
   - from:
       type: column
       data:
-        column_name: first_name
+        column_name: last_name
     to:
       field_name: user_identifier.address_info.hashed_first_name
   - from:
