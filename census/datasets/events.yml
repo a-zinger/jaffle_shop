@@ -1,8 +1,0 @@
----
-dataset:events:
-  type: sql
-  name: events
-  query: select 1 as id, 1 as user_id, 'purchase' as event_name, '2025-05-30' as event_time
-  description:
-  icon:
-  connection: connection:redshift-tf-redshift-demo-cluster

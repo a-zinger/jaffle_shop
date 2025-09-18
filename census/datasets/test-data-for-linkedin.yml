@@ -1,9 +1,0 @@
----
-dataset:test-data-for-linkedin:
-  type: sql
-  name: test data for linkedin
-  query: select 1 as id, 'alex@getcensus.com' as email, '11af869c-f88a-4288-af0b-6e10373bfcbc'
-    as tracking_id
-  description: ''
-  icon:
-  connection: connection:redshift-tf-redshift-demo-cluster

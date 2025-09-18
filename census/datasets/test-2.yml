@@ -1,8 +1,0 @@
----
-dataset:test-2:
-  type: sql
-  name: test
-  query: select 1 as id
-  description: ''
-  icon:
-  connection: connection:bigquery-sutrolabs-giza-development

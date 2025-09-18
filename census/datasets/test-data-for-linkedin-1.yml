@@ -1,9 +1,0 @@
----
-dataset:test-data-for-linkedin-1:
-  type: sql
-  name: test data for linkedin new
-  query: select 1 as id, EXTRACT(EPOCH FROM getdate()) as event_time, 'e1390a53-f37a-4fa6-aa00-633d0a97b80f'
-    as linkedin_first_party_id, 'alex test event' as name
-  description: ''
-  icon:
-  connection: connection:redshift-tf-redshift-demo-cluster
