@@ -1,6 +1,6 @@
 ---
 sync:redshift-test-facebook-custom-audience:
-  paused: true
+  paused: false
   behavior:
     operation: mirror
   mapping_configuration:
