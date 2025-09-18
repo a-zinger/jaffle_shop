@@ -1,0 +1,58 @@
+---
+sync:redshift-test-facebook-custom-audience-1:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:facebook-ads-meta
+    object_identifier: customer
+  source:
+    type: dataset
+    connection_identifier: connection:redshift-census-demo
+    object_identifier: dataset:test
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: EXTERN_ID
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: COUNTRY_PREHASHED
+  - from:
+      type: constant
+      data:
+        basic_type: text
+        value: alex test list
+    to:
+      field_name: audience
+      lookup_object:
+        object_identifier: audience
+        field_to_match_by: name
+    array_field: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords
