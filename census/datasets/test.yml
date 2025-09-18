@@ -2,7 +2,7 @@
 dataset:test:
   type: sql
   name: test
-  query: select 1 as id
+  query: select 1 as id, 2 as id2
   description: ''
   icon:
   connection: connection:redshift-census-demo
