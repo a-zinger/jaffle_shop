@@ -28,6 +28,12 @@ sync:redshift-test-facebook-custom-audience:
       field_name: EXTERN_ID
     is_primary_identifier: true
   - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: COUNTRY_PREHASHED
+  - from:
       type: constant
       data:
         basic_type: text
@@ -49,4 +55,3 @@ sync:redshift-test-facebook-custom-audience:
       should_send_recovery: true
       options:
         threshold: 75
-  sync_behavior_family: mapRecords
