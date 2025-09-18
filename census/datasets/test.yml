@@ -1,0 +1,8 @@
+---
+dataset:test:
+  type: sql
+  name: test
+  query: select 1 as id
+  description: ''
+  icon:
+  connection: connection:redshift-census-demo
