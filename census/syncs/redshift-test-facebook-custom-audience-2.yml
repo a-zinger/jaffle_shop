@@ -30,6 +30,12 @@ sync:redshift-test-facebook-custom-audience-2:
   - from:
       type: column
       data:
+        column_name: id2
+    to:
+      field_name: CT
+  - from:
+      type: column
+      data:
         column_name: id
     to:
       field_name: COUNTRY_PREHASHED
@@ -55,4 +61,3 @@ sync:redshift-test-facebook-custom-audience-2:
       should_send_recovery: true
       options:
         threshold: 75
-  sync_behavior_family: mapRecords
